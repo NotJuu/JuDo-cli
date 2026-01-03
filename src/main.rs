@@ -133,7 +133,65 @@ async fn remove_todo() -> std::io::Result<()> {
 }
 
 async fn edit_todo() -> std::io::Result<()> {
-    //Edit a Todo
+    let file_path = "todo.json";
+    let data = std::fs::read_to_string(file_path)?;
+    let mut json_data: Value = serde_json::from_str(&data)
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?;
+
+    // 1. Todos anzeigen
+    if let Some(array) = json_data.as_array() {
+        if array.is_empty() {
+            println!("\nListe is empty.");
+            return Ok(());
+        }
+        println!("\n--- YOUR TODOS ---");
+        for item in array {
+            let id = item["id"].as_i64().unwrap_or(0);
+            let status = if item["completed"].as_bool().unwrap_or(false) {
+                "x"
+            } else {
+                " "
+            };
+            println!("{}. [{}] {}", id, status, item["task"]);
+        }
+    }
+
+    // 2. select ID
+    print!("\nWhich ID do you want to edit? ");
+    std::io::stdout().flush()?;
+    let mut id_input = String::new();
+    std::io::stdin().read_line(&mut id_input)?;
+    let target_id: i64 = id_input.trim().parse().unwrap_or(-1);
+
+    // 3. Ask for new Text
+    print!("New Text for the task: ");
+    std::io::stdout().flush()?;
+    let mut new_task_text = String::new();
+    std::io::stdin().read_line(&mut new_task_text)?;
+    let new_task_text = new_task_text.trim();
+
+    // 4. Search for the Text and change it
+    let mut found = false;
+    if let Some(array) = json_data.as_array_mut() {
+        for item in array {
+            if item.get("id").and_then(Value::as_i64) == Some(target_id) {
+                // changed text to new Text:
+                item["task"] = Value::String(new_task_text.to_string());
+                found = true;
+                break;
+            }
+        }
+    }
+
+    if found {
+        // 5. Save
+        let modified_data = serde_json::to_string_pretty(&json_data)?;
+        std::fs::write(file_path, modified_data)?;
+        println!("Task changed!");
+    } else {
+        println!("ID {} not found.", target_id);
+    }
+
     Ok(())
 }
 
