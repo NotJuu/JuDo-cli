@@ -18,7 +18,7 @@ JuDo-cli is a powerful yet simple command-line interface application designed to
 ## ✨ Features
 
 -   🎯 **Add Todos**: Quickly add new tasks to your list.
--   📝 **List Todos**: View all your pending and completed tasks.
+-   📝 **Edit Todos**: Edit all your tasks.
 -   ✅ **Mark as Done**: Easily mark tasks as completed.
 -   🗑️ **Remove Todos**: Delete tasks you no longer need.
 -   ⚡ **Asynchronous Operations**: Experience fast and responsive command execution.
@@ -30,11 +30,9 @@ JuDo-cli is a powerful yet simple command-line interface application designed to
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 
 **Libraries:**
-![Clap](https://img.shields.io/badge/Clap-F56000?style=for-the-badge)
 ![Tokio](https://img.shields.io/badge/Tokio-0077B6?style=for-the-badge)
 ![Serde](https://img.shields.io/badge/Serde-303030?style=for-the-badge)
 ![Serde_json](https://img.shields.io/badge/Serde_json-303030?style=for-the-badge)
-![Anyhow](https://img.shields.io/badge/Anyhow-512BD4?style=for-the-badge)
 
 ## 🚀 Quick Start
 
@@ -143,11 +141,8 @@ This project is currently unlicensed. <!-- TODO: Add a LICENSE file (e.g., MIT, 
 ## 🙏 Acknowledgments
 
 -   The Rust Programming Language team for creating such an amazing language and ecosystem.
--   [clap](https://crates.io/crates/clap) for robust command-line argument parsing.
 -   [tokio](https://crates.io/crates/tokio) for the asynchronous runtime.
 -   [serde](https://crates.io/crates/serde) and [serde_json](https://crates.io/crates/serde_json) for efficient data serialization.
--   [anyhow](https://crates.io/crates/anyhow) for simplified error handling.
--   [home](https://crates.io/crates/home) for finding user home directories.
 
 ## 📞 Support & Contact
 
